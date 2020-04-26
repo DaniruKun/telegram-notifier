@@ -1,1 +1,1 @@
-worker: java $JVM_OPTS -jar target/uberjar/telegram-notifier-standalone.jar
+web: java $JVM_OPTS -cp target/uberjar/telegram-notifier-standalone.jar clojure.main -m telegram-notifier.core
