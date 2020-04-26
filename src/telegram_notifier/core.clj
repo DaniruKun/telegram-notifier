@@ -9,27 +9,18 @@
   (:gen-class))
 
 (def token (env :telegram-token))
+(def help-text (slurp "resources/help.md"))
 
 (h/defhandler handler
-  ;; Main message handler
-              ;;{:message_id 44, :from {:id 107956390, :is_bot false, :first_name Daniil, :last_name Petrov, :username DanPetrov, :language_code en}, :chat {:id -233956393, :title TestGroup, :type group, :all_members_are_administrators true}, :date 1587826032, :text test}
-              ;;{
-              ;; :message_id 47, :from {
-              ;; :id 48275381, :is_bot false, :first_name Viktors},
-              ;; :chat {:id -233956393,
-              ;; :title TestGroup,
-              ;; :type group,
-              ;; :all_members_are_administrators true},
-              ;; :date 1587827119, :text .}
 
   (h/command-fn "start"
                 (fn [{{id :id :as chat} :chat}]
                   (println "Bot joined new chat: " chat)
-                  (t/send-text token id "Welcome to telegram-notifier!")))
+                  (t/send-text token id "Member Notification Bot started!")))
 
   (h/command-fn "help"
                 (fn [{{id :id :as chat} :chat}]
-                  (t/send-text token id "Help is on the way")))
+                  (t/send-text token id {:parse_mode "MarkdownV2"} help-text)))
 
   (h/command-fn "notifyall"
                 (fn [{{id :id :as chat} :chat}]
