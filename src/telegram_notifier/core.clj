@@ -33,13 +33,13 @@
                         ((util/pin-chat-msg token id ((notif-msg :result) :message_id))
                          (util/unpin-chat-msg token id)
                          (do
-                           (when pinned-msg (util/pin-chat-msg token id pinned-msg))))))))))
+                           (when pinned-msg (util/pin-chat-msg token id pinned-msg true))))))))))
 
 (defn -main
   [& args]
   (when (str/blank? token)
-    (println "Please provde token in TELEGRAM_TOKEN environment variable!")
+    (println "TELEGRAM_TOKEN environment variable NOT SET!")
     (System/exit 1))
 
-  (println "Starting the telegram-notifier")
+  (println "Starting the telegram-notifier...")
   (<!! (p/start token handler)))
