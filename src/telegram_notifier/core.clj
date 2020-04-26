@@ -24,16 +24,17 @@
 
   (h/command-fn "notifyall"
                 (fn [{{id :id :as chat} :chat}]
-                  (t/send-text token id "Notifying all members")
                   (let [chat-info (util/get-chat token id)
                         pinned-msg (util/get-pinned-msg chat-info)]
                     (do
-                      (when pinned-msg (util/unpin-chat-msg token id))
-                      (let [notif-msg (t/send-text token id "HERE")]
-                        ((util/pin-chat-msg token id ((notif-msg :result) :message_id))
-                         (util/unpin-chat-msg token id)
-                         (do
-                           (when pinned-msg (util/pin-chat-msg token id pinned-msg true))))))))))
+                      (if (not= "private" ((chat-info :result) :type))
+                        (do
+                          (let [notif-msg (t/send-text token id "HERE")]
+                            ((util/pin-chat-msg token id ((notif-msg :result) :message_id))
+                             (util/unpin-chat-msg token id)
+                             (do
+                               (when pinned-msg (util/pin-chat-msg token id pinned-msg true))))))
+                        (when pinned-msg (util/unpin-chat-msg token id))))))))
 
 (defn -main
   [& args]
