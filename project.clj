@@ -1,6 +1,6 @@
-(defproject telegram-notifier "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+(defproject telegram-notifier "0.2.0"
+  :description "Telegram notification bot built on top of Morse."
+  :url "https://github.com/DaniruKun/telegram-notifier"
   :min-lein-version "2.0.0"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}

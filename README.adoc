@@ -1,0 +1,60 @@
+image:https://github.com/DaniruKun/telegram-notifier/workflows/Clojure%20CI/badge.svg?style=svg["Github CI", link="https://github.com/DaniruKun/telegram-notifier/actions?query=workflow%3A%22Clojure+CI%22"]
+
+image::doc/logo.svg[Logo,120]
+= About
+
+link:https://t.me/NotifyMembersBot[Member Notification Bot] (MNB) is an app leveraging the Telegram Bot API, built on top of Morse.
+MNB adds missing features to Telegram, such as:
+
+- Allowing to ping/mention all users in a chat, just like in Slack
+
+The current bot is maintained and hosted by link:https://github.com/DaniruKun[@Danirukun] and runs on Heroku.
+
+== Usage
+
+Current bot: link:https://t.me/NotifyMembersBot[@NotifyMembersBot]
+
+1. Add the bot to a channel/group
+2. Add the bot to administrators
+3. Execute the `/start` command
+
+== Running
+
+If you decide to create your own instance, you can either:
+
+- Build uberjar and run it:
+
+    $ lein uberjar
+    $ java -jar target/uberjar/telegram-notifier-standalone.jar
+    
+- Run with Leiningen:
+    
+    $ lein run
+
+=== Environment variables
+
+`TELEGRAM_TOKEN` - your Telegram Bot API token
+
+== Development
+
+The project uses Leiningen. To run locally, just run:
+    
+    $ lein run
+
+The app uses link:https://github.com/Otann/morse[morse] for the API, with additional thin wrappers around `clj-http` located in link:src/telegram_notifier/util.clj[telegram-notifier.util] namespace.
+
+Make sure to set the `TELEGRAM_TOKEN`
+
+== Support
+
+image::https://www.ko-fi.com/img/githubbutton_sm.svg["Ko-Fi", link="https://ko-fi.com/I3I61NHVO"]
+
+== Contributing
+
+Contributing is simple, just make a PR and mention one of the maintainers (e.g. link:https://github.com/DaniruKun[@Danirukun]).
+
+== License
+
+Copyright © 2020 Daniils Petrovs
+
+Distributed under the Eclipse Public License version 1.0
