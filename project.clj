@@ -11,7 +11,7 @@
 
   :plugins [[lein-environ "1.1.0"]]
 
-  :main ^:skip-aot telegram-notifier.core
+  :main telegram-notifier.core
   :target-path "target/%s"
 
   :profiles {:uberjar {:aot :all}
