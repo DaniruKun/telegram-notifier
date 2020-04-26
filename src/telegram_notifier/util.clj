@@ -4,7 +4,6 @@
 
 (def base-url "https://api.telegram.org/bot")
 
-
 (defn get-chat [token chat-id]
   "Get up to date information about the chat"
   (let [url (str base-url token "/getChat")
@@ -12,12 +11,16 @@
         resp (http/post url {:as :json :multipart form})]
     (-> resp :body)))
 
+(defn get-pinned-msg
+  "Get pinned msg id"
+  [chat-info]
+  (if (contains? (chat-info :result) :pinned_message)
+    (int (((chat-info :result) :pinned_message) :message_id))))
 
 (defn user-mention-str
   "Creates a Markdown formatted string to mention user by id"
   [name id]
   (str "[" name "](tg://user?id=" id ")"))
-
 
 (defn get-chat-admins [token chat-id]
   "Get up to date information about the chat admins"
@@ -25,7 +28,6 @@
         form [{:part-name "chat_id" :content (str chat-id)}]
         resp (http/post url {:as :json :multipart form})]
     (-> resp :body)))
-
 
 (defn pin-chat-msg
   "Pin a message in a group, a supergroup, or a channel"
