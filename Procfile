@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -jar target/uberjar/telegram-notifier-standalone.jar
+worker: java $JVM_OPTS -jar target/uberjar/telegram-notifier-standalone.jar
