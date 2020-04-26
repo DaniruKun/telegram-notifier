@@ -8,7 +8,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [environ             "1.1.0"]
                  [morse               "0.2.4"]]
-  :repositories [["central" "https://repo1.maven.org/maven2"]]
+  :repositories [["central2" "https://repo1.maven.org/maven2"]]
 
   :plugins [[lein-environ "1.1.0"]]
 
