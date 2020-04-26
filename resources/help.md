@@ -1,5 +1,3 @@
-*Member Notification Bot*
-
 _The missing notification options for Telegram\._
 
 This bot allows you to ping/notify all group members of a group/channel\.

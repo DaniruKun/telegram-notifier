@@ -19,4 +19,6 @@
   :profiles {:uberjar {:aot :all}
              :dev {:plugins [[lein-cljfmt "0.5.7"]]}}
   :repl-options {:init-ns telegram-notifier.core}
+  :jar-name "telegram-notifier.jar"
+  :uberjar-name "telegram-notifier-standalone.jar"
   )
