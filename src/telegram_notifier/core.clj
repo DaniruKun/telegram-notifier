@@ -29,12 +29,11 @@
                     (do
                       (if (not= "private" ((chat-info :result) :type))
                         (do
+                          (when pinned-msg (util/unpin-chat-msg token id))
                           (let [notif-msg (t/send-text token id "HERE")]
                             ((util/pin-chat-msg token id ((notif-msg :result) :message_id))
                              (util/unpin-chat-msg token id)
-                             (do
-                               (when pinned-msg (util/pin-chat-msg token id pinned-msg true))))))
-                        (when pinned-msg (util/unpin-chat-msg token id))))))))
+                             (when pinned-msg (util/pin-chat-msg token id pinned-msg true)))))))))))
 
 (defn -main
   [& args]
