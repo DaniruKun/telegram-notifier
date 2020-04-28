@@ -7,6 +7,7 @@ link:https://t.me/NotifyMembersBot[Member Notification Bot] (MNB) is an app leve
 MNB adds missing features to Telegram, such as:
 
 - Allowing to ping/mention all users in a chat, just like in Slack
+- Allow to ping all chat/group administrators
 
 The current bot is maintained and hosted by link:https://github.com/DaniruKun[@Danirukun] and runs on Heroku.
 

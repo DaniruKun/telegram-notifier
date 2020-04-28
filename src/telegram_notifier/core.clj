@@ -48,7 +48,7 @@
                   (println "Command executed: [notifyadmins]")
                   (let [admins (util/get-chat-admins token id)
                         notif-text (util/admin-notif-text admins)]
-                    (t/send-text token id notif-text)
+                    (t/send-text token id {:parse_mode "MarkdownV2"} notif-text)
                     ))))
 
 (defn -main
@@ -58,4 +58,5 @@
     (System/exit 1))
 
   (println "Starting the telegram-notifier...")
+
   (<!! (p/start token handler)))
