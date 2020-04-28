@@ -29,11 +29,17 @@
                     (do
                       (if (not= "private" ((chat-info :result) :type))
                         (do
-                          (when pinned-msg (util/unpin-chat-msg token id))
-                          (let [notif-msg (t/send-text token id "HERE")]
-                            ((util/pin-chat-msg token id ((notif-msg :result) :message_id))
-                             (util/unpin-chat-msg token id)
-                             (when pinned-msg (util/pin-chat-msg token id pinned-msg true)))))))))))
+                          (if (util/is-bot-admin token id)
+                            (do
+                              (when pinned-msg (util/unpin-chat-msg token id))
+                              (let [notif-msg (t/send-text token id "HERE")]
+                                ((util/pin-chat-msg token id ((notif-msg :result) :message_id))
+                                 (util/unpin-chat-msg token id)
+                                 (when pinned-msg (util/pin-chat-msg token id pinned-msg true)))))
+                            (t/send-text token id "Not enough rights - add bot to administrators!")))
+                        (do
+                          (t/send-text token id "Cannot notify anyone in a private chat,
+                           add me to a group/channel first!"))))))))
 
 (defn -main
   [& args]
