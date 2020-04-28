@@ -10,6 +10,14 @@
 
 (def token (env :telegram-token))
 (def help-text (slurp "resources/help.md"))
+(def commands [{:command "start"
+                :description "start the bot"}
+               {:command "help"
+                :description "show help printout"}
+               {:command "notifyall"
+                :description "notify all chat members"}
+               {:command "notifyadmins"
+                :description "notify all chat/group admins"}])
 
 (h/defhandler handler
 
@@ -48,8 +56,7 @@
                   (println "Command executed: [notifyadmins]")
                   (let [admins (util/get-chat-admins token id)
                         notif-text (util/admin-notif-text admins)]
-                    (t/send-text token id {:parse_mode "MarkdownV2"} notif-text)
-                    ))))
+                    (t/send-text token id {:parse_mode "MarkdownV2"} notif-text)))))
 
 (defn -main
   [& args]
@@ -58,5 +65,6 @@
     (System/exit 1))
 
   (println "Starting the telegram-notifier...")
+  (util/set-commands token commands)
 
   (<!! (p/start token handler)))
