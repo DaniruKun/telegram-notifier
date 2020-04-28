@@ -20,6 +20,7 @@
 
   (h/command-fn "help"
                 (fn [{{id :id :as chat} :chat}]
+                  (println "Command executed: [help]")
                   (t/send-text token id {:parse_mode "MarkdownV2"} help-text)))
 
   (h/command-fn "notifyall"
@@ -27,6 +28,7 @@
                   (let [chat-info (util/get-chat token id)
                         pinned-msg (util/get-pinned-msg chat-info)]
                     (do
+                      (println "Command executed: [notifyall]")
                       (if (not= "private" ((chat-info :result) :type))
                         (do
                           (if (util/is-bot-admin token id)
