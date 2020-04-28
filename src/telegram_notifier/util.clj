@@ -58,3 +58,21 @@
     (not (empty? (filter
                   (fn [x] (= ((x :user) :id) bot-id))
                   (chat-admin-info :result))))))
+
+(defn admin-notif-text
+  "Create admin notification string"
+  [admins]
+
+  (apply str (for [x (admins :result)
+                   :let [id ((x :user) :id)
+                         username ((x :user) :username)]]
+               (str (user-mention-str username id) " "))))
+
+(defn set-commands
+  "Changes the list of the bot's commands"
+  [token commands]
+  (let [url (str base-url token "/setMyCommands")
+        body commands]
+    (http/post url {:content-type :json
+                    :as :json
+                    :form-params body})))
