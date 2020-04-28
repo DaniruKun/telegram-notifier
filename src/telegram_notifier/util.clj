@@ -58,3 +58,12 @@
     (not (empty? (filter
                   (fn [x] (= ((x :user) :id) bot-id))
                   (chat-admin-info :result))))))
+
+(defn admin-notif-text
+  "Create admin notification string"
+  [admins]
+
+  (apply str (for [x (admins :result)
+                   :let [id ((x :user) :id)
+                         username ((x :user) :username)]]
+               (str (user-mention-str username id) " "))))
