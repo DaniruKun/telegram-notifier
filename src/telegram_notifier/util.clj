@@ -3,6 +3,7 @@
   (:gen-class))
 
 (def base-url "https://api.telegram.org/bot")
+(def bot-id 1113754276)
 
 (defn get-chat [token chat-id]
   "Get up to date information about the chat"
@@ -49,3 +50,11 @@
      (http/post url {:content-type :json
                      :as :json
                      :form-params body}))))
+
+(defn is-bot-admin
+  "Check if bot is an admin in the group"
+  [token chat-id]
+  (let [chat-admin-info (get-chat-admins token chat-id)]
+    (not (empty? (filter
+                  (fn [x] (= ((x :user) :id) bot-id))
+                  (chat-admin-info :result))))))
