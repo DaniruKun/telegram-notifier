@@ -36,7 +36,9 @@
                   (let [chat-info (util/get-chat token id)
                         pinned-msg (util/get-pinned-msg chat-info)]
                     (println "Command executed: [notifyall]")
-                    (if (not= "private" ((chat-info :result) :type))
+                    (if (= "private" ((chat-info :result) :type))
+                      (t/send-text token id "Cannot notify anyone in a private chat,
+                           add me to a group/channel first!")
                       (do
                         (if (util/is-bot-admin token id)
                           (do
@@ -47,9 +49,7 @@
                               (util/unpin-chat-msg token id)
                               (when pinned-msg
                                 (util/pin-chat-msg token id pinned-msg true))))
-                          (t/send-text token id "Not enough rights - add bot to administrators!")))
-                      (t/send-text token id "Cannot notify anyone in a private chat,
-                           add me to a group/channel first!")))))
+                          (t/send-text token id "Not enough rights - add bot to administrators!")))))))
 
   (h/command-fn "notifyadmins"
                 (fn [{{id :id :as chat} :chat}]

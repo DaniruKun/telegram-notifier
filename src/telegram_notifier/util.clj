@@ -62,10 +62,10 @@
 (defn admin-notif-text
   "Create admin notification string"
   [admins]
-
   (apply str (for [x (admins :result)
                    :let [id ((x :user) :id)
-                         username ((x :user) :username)]]
+                         username ((x :user) :username)]
+                   :when (not= id bot-id)]
                (str (user-mention-str username id) " "))))
 
 (defn set-commands

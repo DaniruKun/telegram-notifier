@@ -1,4 +1,4 @@
-(defproject telegram-notifier "0.2.0"
+(defproject telegram-notifier "0.3.0"
   :description "Telegram notification bot built on top of Morse."
   :url "https://github.com/DaniruKun/telegram-notifier"
   :min-lein-version "2.0.0"
