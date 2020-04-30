@@ -65,6 +65,6 @@
     (System/exit 1))
 
   (println "Starting the telegram-notifier...")
-  (util/set-commands token commands)
+  ;; (util/set-commands token commands)
 
   (<!! (p/start token handler)))
