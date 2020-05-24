@@ -56,8 +56,8 @@
                   (println "Command executed: [notifyadmins]")
                   (let [admins (util/get-chat-admins token id)
                         notif-text (util/admin-notif-text admins)]
-                    (println (str "Trying to send notif msg: " notif-text))
-                    (t/send-text token id {:parse_mode "Markdown"} notif-text)))))
+                    (when (not (str/blank? notif-text))
+                      (t/send-text token id {:parse_mode "Markdown"} notif-text))))))
 
 (defn -main
   [& args]

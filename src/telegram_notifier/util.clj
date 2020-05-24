@@ -16,8 +16,8 @@
 (defn get-pinned-msg
   "Get pinned msg id"
   [chat-info]
-  (if (contains? (chat-info :result) :pinned_message)
-    (int (((chat-info :result) :pinned_message) :message_id))))
+  (when (contains? (chat-info :result) :pinned_message)
+    (-> chat-info :result :pinned_message :message_id int)))
 
 (defn user-mention-str
   "Creates a Markdown formatted string to mention user by id"
