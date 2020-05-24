@@ -22,7 +22,7 @@
 (defn user-mention-str
   "Creates a Markdown formatted string to mention user by id"
   [name id]
-  (str "[" name "](tg://user?id=" id ")"))
+  (str "\[" name "\](tg://user?id=" id ")"))
 
 (defn get-chat-admins [token chat-id]
   "Get up to date information about the chat admins"
