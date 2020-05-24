@@ -1,5 +1,6 @@
 (ns telegram-notifier.util
-  (:require [clj-http.client :as http])
+  (:require [clj-http.client :as http]
+            [clojure.string :as str])
   (:gen-class))
 
 (def base-url "https://api.telegram.org/bot")
@@ -65,7 +66,7 @@
   (apply str (for [x (admins :result)
                    :let [id ((x :user) :id)
                          username ((x :user) :username)]
-                   :when (not= id bot-id)]
+                   :when (and (not= id bot-id) (not (str/blank? username)))]
                (str (user-mention-str username id) " "))))
 
 (defn set-commands
