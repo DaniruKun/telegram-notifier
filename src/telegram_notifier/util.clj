@@ -15,9 +15,9 @@
 
 (defn get-pinned-msg
   "Get pinned msg id"
-  [chat-info]
-  (when (contains? (chat-info :result) :pinned_message)
-    (-> chat-info :result :pinned_message :message_id int)))
+  [{chat-info :result}]
+  (when (contains? chat-info :pinned_message)
+    (-> chat-info :pinned_message :message_id int)))
 
 (defn user-mention-str
   "Creates a Markdown formatted string to mention user by id"
@@ -57,15 +57,14 @@
   [token chat-id]
   (let [chat-admin-info (get-chat-admins token chat-id)]
     (not (empty? (filter
-                  (fn [x] (= ((x :user) :id) bot-id))
+                  #(= ((% :user) :id) bot-id)
                   (chat-admin-info :result))))))
 
 (defn admin-notif-text
   "Create admin notification string"
   [admins]
   (apply str (for [x (admins :result)
-                   :let [id ((x :user) :id)
-                         username ((x :user) :username)]
+                   :let [{{id :id username :username} :user} x]
                    :when (and (not= id bot-id) (not (str/blank? username)))]
                (str (user-mention-str username id) " "))))
 
